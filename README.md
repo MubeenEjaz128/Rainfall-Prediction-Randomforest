@@ -23,7 +23,7 @@ This project is a web-based rainfall prediction system built with **Flask** and 
 ---
 
 ## Demo
-![App Screenshot](static/screenshot.png) <!-- Add a screenshot if available -->
+![App Screenshot](Rainfall.png) <!-- Add a screenshot if available -->
 
 ## Tech Stack
 - **Backend:** Python, Flask
