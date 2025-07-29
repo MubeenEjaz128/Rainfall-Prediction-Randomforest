@@ -1,0 +1,213 @@
+/* static/style.css */
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #fcb7cb, #1c92d2);
+    width: 100%; 
+    height: 100vh; 
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+    color: #f0f0f0;
+}
+
+#mode-selection {
+    background: linear-gradient(135deg, #ffffff, #e3f2fd); /* Gradient background */
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 50px; /* Rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05); /* Shadow for depth */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for structure */
+    
+    /* Center text with Flexbox */
+    display: flex; /* Enables Flexbox */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    text-align: center; /* Centers the text itself */
+    height: 30px; /* Set a fixed height for better alignment (adjust as needed) */
+}
+
+/* Optional Hover Effects */
+#mode-selection:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.3), 0 7px 14px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    cursor: pointer; /* Pointer to indicate interactivity */
+}
+
+
+.mode-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.mode-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #333333;
+}
+
+.mode-option input {
+    margin-right: 5px;
+    accent-color: #1c92d2;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.input-group input[type="text"] {
+    flex: 1;
+    border-radius: 10px;
+}
+
+.input-group button {
+    flex-shrink: 0;
+}
+
+button {
+    background-color: #1c92d2;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+button:hover {
+    background-color: #0a6fb3;
+    transform: scale(1.02);
+}
+
+button i {
+    margin-right: 5px;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.weather-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.weather-item input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.weather-item input:focus {
+    border-color: #1c92d2;
+}
+
+.weather-item input[readonly] {
+    background-color: #e9ecef;
+}
+
+#result {
+    font-size: 2em;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin-top: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#result.no-rain {
+    color: #dc3545;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #f0f0f0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    .mode-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weather-grid {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,151 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-pVYzt+9P3a7u6E8SdBI6V8GSSrPfWEmgVVgQ0KGbG15grA7mL0HgCvQr6d/+6eUOxhGlF3xS3S8JmV/8jI6+HA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cloud-rain"></i> Rainfall Prediction</h1>
+            <p>Predict the likelihood of rainfall based on current weather conditions.</p>
+        </header>
+
+        <main>
+            <!-- Mode Selection -->
+            <section id="mode-selection">
+                <form>
+                    <div class="mode-options">
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="city" checked>
+                            <i class="fas fa-city"></i>
+                            Enter City Name
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="current">
+                            <i class="fas fa-location-arrow"></i>
+                            Use Current Location
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="mode" value="manual">
+                            <i class="fas fa-edit"></i>
+                            Manual Input
+                        </label>
+                    </div>
+                </form>
+            </section>
+
+            <!-- City Input Section -->
+            <section id="city-section">
+                <form id="city-form">
+                    <div class="input-group">
+                        <input type="text" id="city" name="city" placeholder="Enter City Name" required>
+                        <button type="button" id="get-weather-city-btn"><i class="fas fa-search"></i> Get Weather</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Current Location Section -->
+            <section id="current-location-section" style="display:none;">
+                <button type="button" id="get-weather-current-btn"><i class="fas fa-location-arrow"></i> Use My Location</button>
+            </section>
+
+            <!-- Manual Input Section -->
+            <section id="manual-section" style="display:none;">
+                <form id="manual-form">
+                    <div class="weather-grid">
+                        <div class="weather-item">
+                            <label for="pressure_manual">Pressure (hPa):</label>
+                            <input type="number" id="pressure_manual" name="pressure_manual" placeholder="e.g., 1015" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="dewpoint_manual">Dew Point (°C):</label>
+                            <input type="number" id="dewpoint_manual" name="dewpoint_manual" placeholder="e.g., 5.24" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="humidity_manual">Humidity (%):</label>
+                            <input type="number" id="humidity_manual" name="humidity_manual" placeholder="e.g., 29" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="cloud_manual">Cloud Coverage (%):</label>
+                            <input type="number" id="cloud_manual" name="cloud_manual" placeholder="e.g., 16" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="sunshine_manual">Sunshine (hrs):</label>
+                            <input type="number" id="sunshine_manual" name="sunshine_manual" placeholder="e.g., 20.16" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="winddirection_manual">Wind Direction (°):</label>
+                            <input type="number" id="winddirection_manual" name="winddirection_manual" placeholder="e.g., 261" required>
+                        </div>
+                        <div class="weather-item">
+                            <label for="windspeed_manual">Wind Speed (m/s):</label>
+                            <input type="number" id="windspeed_manual" name="windspeed_manual" placeholder="e.g., 0.49" required>
+                        </div>
+                    </div>
+                    <button type="button" id="predict-manual-btn"><i class="fas fa-umbrella"></i> Predict</button>
+                </form>
+            </section>
+
+            <!-- Weather Data Section (for City and Current Location Modes) -->
+            <section id="weather-section" style="display:none;">
+                <form id="weather-form">
+                    <div class="weather-grid">
+                        <div class="weather-item">
+                            <label for="pressure">Pressure (hPa):</label>
+                            <input type="number" id="pressure" name="pressure" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="dewpoint">Dew Point (°C):</label>
+                            <input type="number" id="dewpoint" name="dewpoint" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="humidity">Humidity (%):</label>
+                            <input type="number" id="humidity" name="humidity" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="cloud">Cloud Coverage (%):</label>
+                            <input type="number" id="cloud" name="cloud" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="sunshine">Sunshine (hrs):</label>
+                            <input type="number" id="sunshine" name="sunshine" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="winddirection">Wind Direction (°):</label>
+                            <input type="number" id="winddirection" name="winddirection" required readonly>
+                        </div>
+                        <div class="weather-item">
+                            <label for="windspeed">Wind Speed (m/s):</label>
+                            <input type="number" id="windspeed" name="windspeed" required readonly>
+                        </div>
+                    </div>
+                    <button type="button" id="predict-btn"><i class="fas fa-umbrella"></i> Predict</button>
+                </form>
+            </section>
+
+            <!-- Result Section -->
+            <section id="result-section">
+                <div id="result"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Mubeen's Rainfall Prediction System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Link to JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
